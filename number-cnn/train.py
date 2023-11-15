@@ -31,7 +31,7 @@ def evaluate(test_data, net):
     with torch.no_grad():
         for (x, y) in test_data:
             # 将输入数据 x 通过网络进行前向传播，得到输出结果
-            outputs = net.forward(x.view(-1, 28*28))
+            outputs = net.forward(x.view(-1, 28, 28))
             # 遍历每个样本的输出
             for i, output in enumerate(outputs):
                 # 检查模型预测的类别是否与真实类别 y[i] 一致
@@ -57,7 +57,7 @@ def main():
             # 梯度清零
             net.zero_grad()
             # 前向传播
-            output = net.forward(x.view(-1, 28*28))
+            output = net.forward(x.view(-1, 28, 28))
             # 计算损失（负对数似然损失）
             loss = net.cal_loss(output, y)
             # 反向传播
